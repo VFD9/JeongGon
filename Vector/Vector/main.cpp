@@ -1,57 +1,55 @@
 // Vector v0.7
 #include <iostream>
+#include<algorithm>
 
 using namespace std;
 
-// 2의 보수
+// 원소의 개수
+int Size = 0;
+
+// 최대 수용 개수
+int Capacity = 0;
+
+// 컨테이너
+int* Vector = nullptr;
+
+void push_back(const int& _Value);
 
 int main(void)
 {
-	/*
-	char n = 127;
-	n += 1;
-	printf_s("%d", n);
+	// 누적된 횟수만큼 비효율적
+	for (int i = 0; i < 8; ++i)
+		push_back(i * 100 + 100);
 
-	** +연산과 -연산중 무엇이 더 효율적일까
-	char n = 16;
-	n += -6;
-	n -= 6;
+	/*for (int i = 0; i < Size; ++i)
+		cout << Vector[i] << endl;*/
+	
+	return 0;
+}
 
-	** 나누기를 해야 할 떄에는 * 기로 대체할 수 있는지 확인해보고
-	int n = 1920 / 2;
-	// int n = 1920 / 0.5f;
-	printf_s("%d", n);
+void push_back(const int& _Value)
+{
+	// 추가할 공간이 없을때만 수용량이 추가되도록 코드를 수정
+	Capacity += (Capacity <= 3) ? 1 : Capacity >> 1;
 
-	** 아래와 같이 shift 연산자로 사용할 수 있는지 확인해보자.
-	printf_s("%d", n >> 1);
-	*/
-
-	/*
-	//** 배열은 0이 아닌 값으로만 초기화가 가능하다.
-	//** 배열은 상수값으로만 초기화가 가능하다.
-
-	//** 아래와 같이 사용한다면 위 조건은 무시할 수 있다.
-
-	int Size = 0;
-	int iter = 0;
-	배열의 동적할당에는 0도 들어가고 변수도 들어간다.
-	배열을 직접 정하는게 아니고 배열처럼 사용해 크기만 전달하기에 가능하다.
-	int* Vector = new int[Size];
-	Vector[iter];
-	*/
-
-	// 배열은 아니지만 배열처럼 사용할 수 있다.
-	int Size = 10;
-	int iter = 0;
-	int* Vector = new int[Size];
+	int* Temp = new int[Capacity];
 
 	for (int i = 0; i < Size; ++i)
-		Vector[i] = i;
+		Temp[i] = Vector[i];
 
-	for (int i = 0; i < 11; ++i)
-		cout << Vector[iter++] << endl;
+	if (Vector)
+	{
+		delete Vector;
+		Vector = nullptr;
+	}
 
-	return 0;
+	Temp[Size] = _Value;
+	++Size;
+
+	Vector = Temp;
+
+	cout << "Size : " << Size << endl;
+	cout << "Capacity : " << Capacity << endl << endl;
 }
 
 // 배열의 특징
