@@ -18,7 +18,7 @@ void push_back(const int& _Value);
 int main(void)
 {
 	// 누적된 횟수만큼 비효율적
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 29; ++i)
 		push_back(i * 100 + 100);
 
 	/*for (int i = 0; i < Size; ++i)
@@ -29,8 +29,7 @@ int main(void)
 
 void push_back(const int& _Value)
 {
-	// 추가할 공간이 없을때만 수용량이 추가되도록 코드를 수정
-	Capacity += (Capacity <= 3) ? 1 : Capacity >> 1;
+	Capacity += (Capacity <= 3) ? 1 : (Capacity > Size ? 0 : Capacity >> 1);
 
 	int* Temp = new int[Capacity];
 
@@ -47,7 +46,7 @@ void push_back(const int& _Value)
 	++Size;
 
 	Vector = Temp;
-
+	
 	cout << "Size : " << Size << endl;
 	cout << "Capacity : " << Capacity << endl << endl;
 }
