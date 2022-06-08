@@ -60,9 +60,8 @@ void push_back(const int& _Value)
 		// 임시의 저장소를 생성
 		int* Temp = new int[Capacity + 1];
 
-		// 생성된 공간을 초기화함
-		for (int i = 0; i < Capacity; ++i)
-			Temp[i] = NULL;
+		/*for (int i = 0; i < Capacity; ++i)
+			Vector[i]= NULL;*/
 
 		// 기존에 있던 값을 복사
 		for (int i = 0; i < Size; ++i)
@@ -144,12 +143,7 @@ void insert(const int& _index, const int& _Value2)
 	if (Capacity <= Size)
 		Capacity += (Capacity <= 3) ? 1 : Capacity >> 1;
 
-	// 임시 저장소
-	int* Temp = new int[Capacity + 1];
-
-	// 초기화
-	for (int i = 0; i < Capacity; ++i)
-		Temp[i] = NULL;
+		int* Temp = new int[Size + 1];
 
 	// 해당 위치 이전의 값을 복사
 	for (int i = 0; i < _index; ++i)
