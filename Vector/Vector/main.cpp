@@ -19,6 +19,7 @@ void pop_back();
 int front();
 int back();
 void erase(const int& _where);
+void insert(const int& _index, const int& _Value2);
 
 int main(void)
 {
@@ -30,9 +31,10 @@ int main(void)
 	push_back(10000);
 
 	erase(3);
+	insert(5, 120);
 
-	cout << front() << endl;
-	cout << back() << endl << endl;
+	cout << "front : " << front() << endl;
+	cout << "back : " << back() << endl << endl;
 
 	for (int i = 0; i < Size; ++i)
 		cout << "Value : " << Vector[i] << endl;
@@ -119,7 +121,53 @@ void erase(const int& _where)
 		Vector[i] = Vector[i + 1];
 }
 
-// 특정 위치에 삽입할 수 있는 insert 함수 만들기
+void insert(const int& _index, const int& _Value2)
+{
+	// 특정 위치에 삽입할 수 있는 insert 함수 만들기
+
+	if (Capacity <= Size)
+	{
+		Capacity += (Capacity <= 3) ? 1 : Capacity >> 1;
+
+		int* Temp = new int[Size + 1];
+
+		for (int i = 0; i < _index; ++i)
+			Temp[i] = Vector[i];
+
+		for (int i = _index; i < Size; ++i)
+			Temp[i + 1] = Vector[i];
+
+		if (Vector)
+		{
+			delete Vector;
+			Vector = nullptr;
+		}
+
+		Temp[_index] = _Value2;
+		Vector = Temp;
+	}
+	else
+	{
+		int* Temp = new int[Size + 1];
+
+		for (int i = 0; i < _index; ++i)
+			Temp[i] = Vector[i];
+
+		for (int i = _index; i < Size; ++i)
+			Temp[i + 1] = Vector[i];
+
+		Temp[_index] = _Value2;
+		Vector = Temp;
+	}
+
+	++Size;
+
+	cout << "Value : " << _Value2 << endl;
+	cout << "Size : " << Size << endl;
+	cout << "Capacity : " << Capacity << endl << endl;
+}
+
+
 
 // 배열의 특징
 /*
